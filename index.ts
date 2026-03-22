@@ -12,11 +12,12 @@ const fetchUsers = async (): Promise<User[]> => {
 };
 
 const run = async () => {
-  const users = await fetchUsers();
-
-  users.forEach((user) => {
-    console.log(user.email);
-  });
+  try {
+    const users = await fetchUsers();
+    console.log(users);
+  } catch (error) {
+    console.log("Something went wrong");
+  }
 };
 
 run();
