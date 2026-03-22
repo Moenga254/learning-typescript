@@ -35,31 +35,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-var fetchUsers = function () { return __awaiter(_this, void 0, void 0, function () {
-    var res, data;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, fetch("https://jsonplaceholder.typicode.com/users")];
-            case 1:
-                res = _a.sent();
-                return [4 /*yield*/, res.json()];
-            case 2:
-                data = _a.sent();
-                return [2 /*return*/, data];
-        }
-    });
-}); };
 var run = function () { return __awaiter(_this, void 0, void 0, function () {
-    var users;
+    var users, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, fetchUsers()];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, fetchUsers()];
             case 1:
                 users = _a.sent();
                 users.forEach(function (user) {
                     console.log(user.email);
                 });
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                if (error_1 instanceof Error) {
+                    console.log(error_1.message);
+                }
+                else {
+                    console.log("Unknown error");
+                }
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

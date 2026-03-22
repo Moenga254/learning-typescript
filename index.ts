@@ -1,8 +1,17 @@
+type Address = {
+  city: string;
+};
+
+type Company = {
+  name: string;
+};
+
 type User = {
   id: number;
   name: string;
-  username: string;
   email: string;
+  address: Address;
+  company: Company;
 };
 
 const fetchUsers = async (): Promise<User[]> => {
@@ -14,9 +23,17 @@ const fetchUsers = async (): Promise<User[]> => {
 const run = async () => {
   try {
     const users = await fetchUsers();
-    console.log(users);
+
+    users.forEach((user) => {
+      console.log(user.company.name); // 👈 changed here
+    });
+
   } catch (error) {
-    console.log("Something went wrong");
+    if (error instanceof Error) {
+      console.log(error.message);
+    } else {
+      console.log("Unknown error");
+    }
   }
 };
 
