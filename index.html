@@ -3,6 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>User Viewer</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    input {
+      padding: 10px;
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    .user {
+      background: white;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
 
@@ -10,6 +31,7 @@
 
   <input type="text" id="search" placeholder="Search user..." />
 
+  <div id="status">Loading...</div>
   <div id="results"></div>
 
   <script src="index.js"></script>
