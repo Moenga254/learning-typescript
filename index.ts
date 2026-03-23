@@ -21,7 +21,7 @@ const fetchUsers = async (): Promise<User[]> => {
 };
 
 const displayUsers = (users: User[]): void => {
-  const filteredUsers = users.filter((user) => user.address.city === "McKenziehaven");
+  const filteredUsers = users.filter((user) => user.address.city === "Gwenborough");
 
   filteredUsers.forEach((user) => {
     console.log("Name:", user.name);

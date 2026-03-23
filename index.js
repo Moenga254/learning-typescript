@@ -50,7 +50,7 @@ var fetchUsers = function () { return __awaiter(_this, void 0, void 0, function 
     });
 }); };
 var displayUsers = function (users) {
-    var filteredUsers = users.filter(function (user) { return user.address.city === "McKenziehaven"; });
+    var filteredUsers = users.filter(function (user) { return user.address.city === "Gwenborough"; });
     filteredUsers.forEach(function (user) {
         console.log("Name:", user.name);
         console.log("City:", user.address.city);
