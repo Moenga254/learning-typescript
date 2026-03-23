@@ -50,9 +50,11 @@ const run = async () => {
   const status = document.getElementById("status") as HTMLDivElement;
 
   try {
+    status.textContent = "Loading...";
+
     const users = await fetchUsers();
 
-    status.textContent = "";
+    status.textContent = ""; // ✅ clear loading AFTER fetch
 
     const input = document.getElementById("search") as HTMLInputElement;
 
