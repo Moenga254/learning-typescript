@@ -36,50 +36,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 var fetchUsers = function () { return __awaiter(_this, void 0, void 0, function () {
-    var res, data;
+    var res;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, fetch("https://jsonplaceholder.typicode.com/users")];
             case 1:
                 res = _a.sent();
-                return [4 /*yield*/, res.json()];
-            case 2:
-                data = _a.sent();
-                return [2 /*return*/, data];
+                return [2 /*return*/, res.json()];
         }
     });
 }); };
-var displayUsers = function (users, search) {
-    var filteredUsers = users.filter(function (user) {
-        return user.name.toLowerCase().includes(search.toLowerCase());
-    });
-    filteredUsers.forEach(function (user) {
-        console.log("Name:", user.name);
-        console.log("Email:", user.email);
-        console.log("----------------------");
+var displayUsers = function (users) {
+    var results = document.getElementById("results");
+    results.innerHTML = "";
+    users.forEach(function (user) {
+        var div = document.createElement("div");
+        div.innerHTML = "\n      <p><strong>".concat(user.name, "</strong></p>\n      <p>").concat(user.email, "</p>\n      <p>").concat(user.company.name, "</p>\n      <hr/>\n    ");
+        results.appendChild(div);
     });
 };
 var run = function () { return __awaiter(_this, void 0, void 0, function () {
-    var users, error_1;
+    var users, input;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, fetchUsers()];
+            case 0: return [4 /*yield*/, fetchUsers()];
             case 1:
                 users = _a.sent();
-                displayUsers(users, "clem"); // 👈 change name here
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _a.sent();
-                if (error_1 instanceof Error) {
-                    console.log(error_1.message);
-                }
-                else {
-                    console.log("Unknown error");
-                }
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                input = document.getElementById("search");
+                input.addEventListener("input", function () {
+                    var value = input.value.toLowerCase();
+                    var filtered = users.filter(function (user) {
+                        return user.name.toLowerCase().includes(value);
+                    });
+                    displayUsers(filtered);
+                });
+                displayUsers(users);
+                return [2 /*return*/];
         }
     });
 }); };

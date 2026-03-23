@@ -16,35 +16,41 @@ type User = {
 
 const fetchUsers = async (): Promise<User[]> => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
-  const data = await res.json();
-  return data;
+  return res.json();
 };
 
-const displayUsers = (users: User[], search: string): void => {
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(search.toLowerCase())
-  );
+const displayUsers = (users: User[]): void => {
+  const results = document.getElementById("results") as HTMLDivElement;
+  results.innerHTML = "";
 
-  filteredUsers.forEach((user) => {
-    console.log("Name:", user.name);
-    console.log("Email:", user.email);
-    console.log("----------------------");
+  users.forEach((user) => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <p><strong>${user.name}</strong></p>
+      <p>${user.email}</p>
+      <p>${user.company.name}</p>
+      <hr/>
+    `;
+    results.appendChild(div);
   });
 };
 
 const run = async () => {
-  try {
-    const users = await fetchUsers();
+  const users = await fetchUsers();
 
-    displayUsers(users, "clem"); // 👈 change name here
+  const input = document.getElementById("search") as HTMLInputElement;
 
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-    } else {
-      console.log("Unknown error");
-    }
-  }
+  input.addEventListener("input", () => {
+    const value = input.value.toLowerCase();
+
+    const filtered = users.filter((user) =>
+      user.name.toLowerCase().includes(value)
+    );
+
+    displayUsers(filtered);
+  });
+
+  displayUsers(users);
 };
 
 run();
