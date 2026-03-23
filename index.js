@@ -49,6 +49,14 @@ var fetchUsers = function () { return __awaiter(_this, void 0, void 0, function 
         }
     });
 }); };
+var displayUsers = function (users) {
+    var filteredUsers = users.filter(function (user) { return user.address.city === "McKenziehaven"; });
+    filteredUsers.forEach(function (user) {
+        console.log("Name:", user.name);
+        console.log("City:", user.address.city);
+        console.log("----------------------");
+    });
+};
 var run = function () { return __awaiter(_this, void 0, void 0, function () {
     var users, error_1;
     return __generator(this, function (_a) {
@@ -58,9 +66,7 @@ var run = function () { return __awaiter(_this, void 0, void 0, function () {
                 return [4 /*yield*/, fetchUsers()];
             case 1:
                 users = _a.sent();
-                users.forEach(function (user) {
-                    console.log(user.company.name); // 👈 changed here
-                });
+                displayUsers(users);
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
