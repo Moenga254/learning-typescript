@@ -21,7 +21,16 @@ const fetchUsers = async (): Promise<User[]> => {
 
 const displayUsers = (users: User[]): void => {
   const results = document.getElementById("results") as HTMLDivElement;
+  const status = document.getElementById("status") as HTMLDivElement;
+
   results.innerHTML = "";
+
+  if (users.length === 0) {
+    status.textContent = "No results found";
+    return;
+  }
+
+  status.textContent = "";
 
   users.forEach((user) => {
     const div = document.createElement("div");
