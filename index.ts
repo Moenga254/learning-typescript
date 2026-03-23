@@ -25,32 +25,43 @@ const displayUsers = (users: User[]): void => {
 
   users.forEach((user) => {
     const div = document.createElement("div");
+    div.className = "user";
+
     div.innerHTML = `
       <p><strong>${user.name}</strong></p>
       <p>${user.email}</p>
       <p>${user.company.name}</p>
-      <hr/>
     `;
+
     results.appendChild(div);
   });
 };
 
 const run = async () => {
-  const users = await fetchUsers();
+  const status = document.getElementById("status") as HTMLDivElement;
 
-  const input = document.getElementById("search") as HTMLInputElement;
+  try {
+    const users = await fetchUsers();
 
-  input.addEventListener("input", () => {
-    const value = input.value.toLowerCase();
+    status.textContent = "";
 
-    const filtered = users.filter((user) =>
-      user.name.toLowerCase().includes(value)
-    );
+    const input = document.getElementById("search") as HTMLInputElement;
 
-    displayUsers(filtered);
-  });
+    input.addEventListener("input", () => {
+      const value = input.value.toLowerCase();
 
-  displayUsers(users);
+      const filtered = users.filter((user) =>
+        user.name.toLowerCase().includes(value)
+      );
+
+      displayUsers(filtered);
+    });
+
+    displayUsers(users);
+
+  } catch (error) {
+    status.textContent = "Failed to load users";
+  }
 };
 
 run();
