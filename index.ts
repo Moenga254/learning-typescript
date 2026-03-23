@@ -20,14 +20,19 @@ const fetchUsers = async (): Promise<User[]> => {
   return data;
 };
 
+const displayUsers = (users: User[]): void => {
+  users.forEach((user) => {
+    console.log("Name:", user.name);
+    console.log("Email:", user.email);
+    console.log("Company:", user.company.name);
+    console.log("----------------------");
+  });
+};
+
 const run = async () => {
   try {
     const users = await fetchUsers();
-
-    users.forEach((user) => {
-      console.log(user.company.name); // 👈 changed here
-    });
-
+    displayUsers(users);
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
