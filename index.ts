@@ -27,23 +27,22 @@ const displayUsers = (users: User[]): void => {
 
   if (users.length === 0) {
     status.textContent = "No results found";
-    return;
+  } else {
+    status.textContent = ""; // ✅ clear message when results exist
+
+    users.forEach((user) => {
+      const div = document.createElement("div");
+      div.className = "user";
+
+      div.innerHTML = `
+        <p><strong>${user.name}</strong></p>
+        <p>${user.email}</p>
+        <p>${user.company.name}</p>
+      `;
+
+      results.appendChild(div);
+    });
   }
-
-  status.textContent = "";
-
-  users.forEach((user) => {
-    const div = document.createElement("div");
-    div.className = "user";
-
-    div.innerHTML = `
-      <p><strong>${user.name}</strong></p>
-      <p>${user.email}</p>
-      <p>${user.company.name}</p>
-    `;
-
-    results.appendChild(div);
-  });
 };
 
 const run = async () => {
