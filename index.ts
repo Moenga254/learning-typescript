@@ -20,12 +20,14 @@ const fetchUsers = async (): Promise<User[]> => {
   return data;
 };
 
-const displayUsers = (users: User[]): void => {
-  const filteredUsers = users.filter((user) => user.address.city === "Gwenborough");
+const displayUsers = (users: User[], search: string): void => {
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   filteredUsers.forEach((user) => {
     console.log("Name:", user.name);
-    console.log("City:", user.address.city);
+    console.log("Email:", user.email);
     console.log("----------------------");
   });
 };
@@ -33,7 +35,9 @@ const displayUsers = (users: User[]): void => {
 const run = async () => {
   try {
     const users = await fetchUsers();
-    displayUsers(users);
+
+    displayUsers(users, "clem"); // 👈 change name here
+
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

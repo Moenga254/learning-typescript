@@ -49,11 +49,13 @@ var fetchUsers = function () { return __awaiter(_this, void 0, void 0, function 
         }
     });
 }); };
-var displayUsers = function (users) {
-    var filteredUsers = users.filter(function (user) { return user.address.city === "Gwenborough"; });
+var displayUsers = function (users, search) {
+    var filteredUsers = users.filter(function (user) {
+        return user.name.toLowerCase().includes(search.toLowerCase());
+    });
     filteredUsers.forEach(function (user) {
         console.log("Name:", user.name);
-        console.log("City:", user.address.city);
+        console.log("Email:", user.email);
         console.log("----------------------");
     });
 };
@@ -66,7 +68,7 @@ var run = function () { return __awaiter(_this, void 0, void 0, function () {
                 return [4 /*yield*/, fetchUsers()];
             case 1:
                 users = _a.sent();
-                displayUsers(users);
+                displayUsers(users, "clem"); // 👈 change name here
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
